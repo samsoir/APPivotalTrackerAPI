@@ -31,38 +31,30 @@
 - (id)initWithUsername:(NSString *) username password:(NSString *) password
 {
 	self = [self init];
-
+	
 	if (self)
 	{
 		self.username = username;
 		self.password = password;
 	}
-
+	
 	return self;
 }
 
-/*
- Creates a Pivotal Auth Token valid URL
- */
-- (NSString *)createPivotalAuthTokenURL:username:(NSString *) user 
-										password:(NSString *) pass
+- (NSURL *)getPivotalURLUsingEncodedAuth
 {
-
-	NSString *auth = [NSString stringWithFormat:@"%@:%@", user, pass];
-
-	NSData *authUTF8Data = [auth dataUsingEncoding: NSUTF8StringEncoding
-								  allowLossyConversion: YES];
-
-	NSString *authStringEncoded = [[NSString alloc] 
-									initWithData:authUTF8Data 
-										encoding:NSUTF8StringEncoding];
 	
-	NSString *url = [[NSString alloc] initWithFormat:@"%@://@%@@%@",
-					  APPIVOTALPROTOCOL, authStringEncoded, _pivotalTokenURL];
-	[authStringEncoded release];
-
-	[url autorelease];
-	return url;
+	NSString *urlString = [[NSString alloc] 
+						   initWithFormat:
+						   @"https://%@:%@@www.pivotaltracker.com/services/v3/tokens/active",
+						   [self.username getURLEncodedString], 
+						   [self.password getURLEncodedString]];
+	
+	NSURL *url = [[NSURL alloc] initWithString:urlString];
+	
+	[urlString release];
+	
+	return [url autorelease];
 }
 
 /*
@@ -72,9 +64,7 @@
 {
     self = [super init];
     if (self) {
-        // Initialization code here.
-		_pivotalTokenURL = 
-			@"www.pivotaltracker.com/services/v3/tokens/active";
+		
     }
     
     return self;
@@ -85,7 +75,6 @@
  */
 - (void) dealloc
 {
-	[_pivotalTokenURL release];
 	[_token release];
 	[_username release];
 	[_password release];

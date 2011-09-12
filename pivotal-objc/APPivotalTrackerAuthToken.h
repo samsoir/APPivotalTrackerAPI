@@ -24,12 +24,7 @@
 #import <Foundation/Foundation.h>
 #import "NSString+URLEncoded.h"
 
-#ifndef APPIVOTALPROTOCOL
-	#define APPIVOTALPROTOCOL "https"
-#endif
-
 @interface APPivotalTrackerAuthToken : NSObject {
-	NSString *_pivotalTokenURL;
 	NSString *_token;
 	NSString *_username;
 	NSString *_password;
@@ -45,7 +40,6 @@
 
 #pragma mark -- Methods
 - (id)initWithUsername:(NSString *) username password:(NSString *) password;
-- (NSString *)createPivotalAuthTokenURL:username:(NSString *) user 
-										password:(NSString *) pass;
+- (NSURL *)getPivotalURLUsingEncodedAuth;
 
 @end
