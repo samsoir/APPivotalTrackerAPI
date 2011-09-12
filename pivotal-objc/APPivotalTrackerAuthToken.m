@@ -58,13 +58,25 @@
 }
 
 /*
+ Gets the pivotal auth token
+ */
+- (void)getPivotalToken:(NSURL *)url
+{
+	[_connection initWithRequest:[NSURLRequest requestWithURL:url] 
+						delegate:self];
+	
+	[_connection start];
+}
+
+/*
  Initializes the library
  */
 - (id)init
 {
     self = [super init];
     if (self) {
-		
+		_tokenXML = [NSMutableData alloc];
+		_connection = [NSURLConnection alloc];
     }
     
     return self;
@@ -75,11 +87,42 @@
  */
 - (void) dealloc
 {
-	[_token release];
 	[_username release];
 	[_password release];
+	[_token release];
+	[_tokenXML release];
+	[_connection release];
 	
 	[super dealloc];
+}
+
+#pragma mark -- NSURLConnectionDelegate Methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+	NSLog(@"Did receive HTTP auth challenge: %@", challenge);
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+	NSLog(@"Did receive response: \n %@", response);
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+	[_tokenXML appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+	NSLog(@"\n\n%@", [NSString stringWithUTF8String:[_tokenXML bytes]]);
+	[_connection release];
+	_connection = nil;
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+	NSLog(@"Did fail with error: \n %@", error);	
 }
 
 @end
