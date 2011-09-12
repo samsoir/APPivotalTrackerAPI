@@ -1,0 +1,405 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7B1C1A52141E808600F9CD17 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1C1A51141E808600F9CD17 /* Cocoa.framework */; };
+		7B1C1A5C141E808600F9CD17 /* pivotal-objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C1A5B141E808600F9CD17 /* pivotal-objc.m */; };
+		7B1C1A64141E808600F9CD17 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1C1A63141E808600F9CD17 /* SenTestingKit.framework */; };
+		7B1C1A65141E808600F9CD17 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1C1A51141E808600F9CD17 /* Cocoa.framework */; };
+		7B1C1A68141E808600F9CD17 /* libpivotal-objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1C1A4E141E808600F9CD17 /* libpivotal-objc.a */; };
+		7B1C1A6E141E808600F9CD17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B1C1A6C141E808600F9CD17 /* InfoPlist.strings */; };
+		7B1C1A70141E808600F9CD17 /* pivotal_objcTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 7B1C1A6F141E808600F9CD17 /* pivotal_objcTests.h */; };
+		7B1C1A72141E808600F9CD17 /* pivotal_objcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C1A71141E808600F9CD17 /* pivotal_objcTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7B1C1A66141E808600F9CD17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B1C1A45141E808600F9CD17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B1C1A4D141E808600F9CD17;
+			remoteInfo = "pivotal-objc";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7B1C1A4E141E808600F9CD17 /* libpivotal-objc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libpivotal-objc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B1C1A51141E808600F9CD17 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		7B1C1A54141E808600F9CD17 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		7B1C1A55141E808600F9CD17 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7B1C1A56141E808600F9CD17 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7B1C1A59141E808600F9CD17 /* pivotal-objc-Prefix.pch */ = {isa = PBXFileReference; path = "pivotal-objc-Prefix.pch"; sourceTree = "<group>"; };
+		7B1C1A5A141E808600F9CD17 /* pivotal-objc.h */ = {isa = PBXFileReference; path = "pivotal-objc.h"; sourceTree = "<group>"; };
+		7B1C1A5B141E808600F9CD17 /* pivotal-objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "pivotal-objc.m"; sourceTree = "<group>"; };
+		7B1C1A62141E808600F9CD17 /* pivotal-objcTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pivotal-objcTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B1C1A63141E808600F9CD17 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		7B1C1A6B141E808600F9CD17 /* pivotal-objcTests-Info.plist */ = {isa = PBXFileReference; path = "pivotal-objcTests-Info.plist"; sourceTree = "<group>"; };
+		7B1C1A6D141E808600F9CD17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7B1C1A6F141E808600F9CD17 /* pivotal_objcTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pivotal_objcTests.h; sourceTree = "<group>"; };
+		7B1C1A71141E808600F9CD17 /* pivotal_objcTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pivotal_objcTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7B1C1A4B141E808600F9CD17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B1C1A52141E808600F9CD17 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B1C1A5E141E808600F9CD17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B1C1A64141E808600F9CD17 /* SenTestingKit.framework in Frameworks */,
+				7B1C1A65141E808600F9CD17 /* Cocoa.framework in Frameworks */,
+				7B1C1A68141E808600F9CD17 /* libpivotal-objc.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7B1C1A43141E808600F9CD17 = {
+			isa = PBXGroup;
+			children = (
+				7B1C1A57141E808600F9CD17 /* pivotal-objc */,
+				7B1C1A69141E808600F9CD17 /* pivotal-objcTests */,
+				7B1C1A50141E808600F9CD17 /* Frameworks */,
+				7B1C1A4F141E808600F9CD17 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7B1C1A4F141E808600F9CD17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7B1C1A4E141E808600F9CD17 /* libpivotal-objc.a */,
+				7B1C1A62141E808600F9CD17 /* pivotal-objcTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7B1C1A50141E808600F9CD17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B1C1A51141E808600F9CD17 /* Cocoa.framework */,
+				7B1C1A63141E808600F9CD17 /* SenTestingKit.framework */,
+				7B1C1A53141E808600F9CD17 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B1C1A53141E808600F9CD17 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B1C1A54141E808600F9CD17 /* AppKit.framework */,
+				7B1C1A55141E808600F9CD17 /* CoreData.framework */,
+				7B1C1A56141E808600F9CD17 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		7B1C1A57141E808600F9CD17 /* pivotal-objc */ = {
+			isa = PBXGroup;
+			children = (
+				7B1C1A5A141E808600F9CD17 /* pivotal-objc.h */,
+				7B1C1A5B141E808600F9CD17 /* pivotal-objc.m */,
+				7B1C1A58141E808600F9CD17 /* Supporting Files */,
+			);
+			path = "pivotal-objc";
+			sourceTree = "<group>";
+		};
+		7B1C1A58141E808600F9CD17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B1C1A59141E808600F9CD17 /* pivotal-objc-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7B1C1A69141E808600F9CD17 /* pivotal-objcTests */ = {
+			isa = PBXGroup;
+			children = (
+				7B1C1A6F141E808600F9CD17 /* pivotal_objcTests.h */,
+				7B1C1A71141E808600F9CD17 /* pivotal_objcTests.m */,
+				7B1C1A6A141E808600F9CD17 /* Supporting Files */,
+			);
+			path = "pivotal-objcTests";
+			sourceTree = "<group>";
+		};
+		7B1C1A6A141E808600F9CD17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B1C1A6B141E808600F9CD17 /* pivotal-objcTests-Info.plist */,
+				7B1C1A6C141E808600F9CD17 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7B1C1A4C141E808600F9CD17 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7B1C1A4D141E808600F9CD17 /* pivotal-objc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B1C1A75141E808600F9CD17 /* Build configuration list for PBXNativeTarget "pivotal-objc" */;
+			buildPhases = (
+				7B1C1A4A141E808600F9CD17 /* Sources */,
+				7B1C1A4B141E808600F9CD17 /* Frameworks */,
+				7B1C1A4C141E808600F9CD17 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "pivotal-objc";
+			productName = "pivotal-objc";
+			productReference = 7B1C1A4E141E808600F9CD17 /* libpivotal-objc.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		7B1C1A61141E808600F9CD17 /* pivotal-objcTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B1C1A78141E808600F9CD17 /* Build configuration list for PBXNativeTarget "pivotal-objcTests" */;
+			buildPhases = (
+				7B1C1A5D141E808600F9CD17 /* Sources */,
+				7B1C1A5E141E808600F9CD17 /* Frameworks */,
+				7B1C1A5F141E808600F9CD17 /* Resources */,
+				7B1C1A60141E808600F9CD17 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7B1C1A67141E808600F9CD17 /* PBXTargetDependency */,
+			);
+			name = "pivotal-objcTests";
+			productName = "pivotal-objcTests";
+			productReference = 7B1C1A62141E808600F9CD17 /* pivotal-objcTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7B1C1A45141E808600F9CD17 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Adapter Pattern";
+			};
+			buildConfigurationList = 7B1C1A48141E808600F9CD17 /* Build configuration list for PBXProject "pivotal-objc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7B1C1A43141E808600F9CD17;
+			productRefGroup = 7B1C1A4F141E808600F9CD17 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7B1C1A4D141E808600F9CD17 /* pivotal-objc */,
+				7B1C1A61141E808600F9CD17 /* pivotal-objcTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7B1C1A5F141E808600F9CD17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B1C1A6E141E808600F9CD17 /* InfoPlist.strings in Resources */,
+				7B1C1A70141E808600F9CD17 /* pivotal_objcTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7B1C1A60141E808600F9CD17 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7B1C1A4A141E808600F9CD17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B1C1A5C141E808600F9CD17 /* pivotal-objc.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B1C1A5D141E808600F9CD17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B1C1A72141E808600F9CD17 /* pivotal_objcTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7B1C1A67141E808600F9CD17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B1C1A4D141E808600F9CD17 /* pivotal-objc */;
+			targetProxy = 7B1C1A66141E808600F9CD17 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7B1C1A6C141E808600F9CD17 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B1C1A6D141E808600F9CD17 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7B1C1A73141E808600F9CD17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7B1C1A74141E808600F9CD17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7B1C1A76141E808600F9CD17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "pivotal-objc/pivotal-objc-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7B1C1A77141E808600F9CD17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "pivotal-objc/pivotal-objc-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7B1C1A79141E808600F9CD17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "pivotal-objc/pivotal-objc-Prefix.pch";
+				INFOPLIST_FILE = "pivotal-objcTests/pivotal-objcTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		7B1C1A7A141E808600F9CD17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "pivotal-objc/pivotal-objc-Prefix.pch";
+				INFOPLIST_FILE = "pivotal-objcTests/pivotal-objcTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7B1C1A48141E808600F9CD17 /* Build configuration list for PBXProject "pivotal-objc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B1C1A73141E808600F9CD17 /* Debug */,
+				7B1C1A74141E808600F9CD17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B1C1A75141E808600F9CD17 /* Build configuration list for PBXNativeTarget "pivotal-objc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B1C1A76141E808600F9CD17 /* Debug */,
+				7B1C1A77141E808600F9CD17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7B1C1A78141E808600F9CD17 /* Build configuration list for PBXNativeTarget "pivotal-objcTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B1C1A79141E808600F9CD17 /* Debug */,
+				7B1C1A7A141E808600F9CD17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7B1C1A45141E808600F9CD17 /* Project object */;
+}
