@@ -20,24 +20,30 @@
 //  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR 
 //  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+#define APPT_ERROR_CONNECTION_AUTH_CHALLENGE 10000
+
 #import <Foundation/Foundation.h>
 #import "NSString+URLEncoded.h"
 
-@interface APPivotalTrackerAuthToken : NSObject {
+@interface APPivotalTrackerAuthToken : NSObject <NSXMLParserDelegate> {
 	NSMutableData *_tokenXML;
 	NSURLConnection *_connection;
+	NSXMLParser *_xmlParser;
 	NSString *_token;
 	NSString *_username;
 	NSString *_password;
 	NSInteger _tokenType;
+	NSMutableString *_xmlStringBuffer;
+	NSError *_error;
 }
 
 #pragma mark -- Properties
 
-@property (nonatomic, retain, readonly) NSString *token;
+@property (nonatomic, readonly) NSString *token;
 @property (nonatomic, readonly) NSInteger tokenType;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *password;
+@property (nonatomic, readonly) NSError *error;
 
 #pragma mark -- Methods
 - (id)initWithUsername:(NSString *) username password:(NSString *) password;
@@ -58,21 +64,17 @@
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
 /*! 
- @method connection:didReceiveResponse:   
- @abstract This method is called when the URL loading system has
- received sufficient load data to construct a NSURLResponse object.
- @discussion The given NSURLResponse is immutable and
- will not be modified by the URL loading system once it is
- presented to the NSURLConnectionDelegate by this method.
- <p>See the category description for information regarding
- the contract associated with the delivery of this delegate 
+ @method connection:didFailWithError:   
+ @abstract This method is called when an NSURLConnection has
+ failed to load successfully.
+ @discussion See the category description for information regarding
+ the contract associated with the delivery of this delegate
  callback.
- @param connection an NSURLConnection instance for which the
- NSURLResponse is now available.
- @param response the NSURLResponse object for the given
- NSURLConnection.
+ @param connection an NSURLConnection that has failed to load.
+ @param error The error that encapsulates information about what
+ caused the load to fail.
  */
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 
 /*! 
  @method connection:didReceiveData:   
@@ -118,5 +120,11 @@
  caused the load to fail.
  */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+
+#pragma mark -- NSXMLParserDelegate Methods
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict;
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName;
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string;
 
 @end

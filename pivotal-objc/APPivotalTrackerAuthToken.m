@@ -27,6 +27,7 @@
 @synthesize tokenType = _tokenType;
 @synthesize username = _username;
 @synthesize password = _password;
+@synthesize error = _error;
 
 - (id)initWithUsername:(NSString *) username password:(NSString *) password
 {
@@ -36,6 +37,7 @@
 	{
 		self.username = username;
 		self.password = password;
+		_error = nil;
 	}
 	
 	return self;
@@ -66,6 +68,8 @@
 						delegate:self];
 	
 	[_connection start];
+	NSLog(@"Non blocking?");
+	
 }
 
 /*
@@ -77,6 +81,7 @@
     if (self) {
 		_tokenXML = [NSMutableData alloc];
 		_connection = [NSURLConnection alloc];
+		_error = nil;
     }
     
     return self;
@@ -91,7 +96,10 @@
 	[_password release];
 	[_token release];
 	[_tokenXML release];
+	[_xmlStringBuffer release];
 	[_connection release];
+	[_xmlParser release];
+	[_error release];
 	
 	[super dealloc];
 }
@@ -100,12 +108,15 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-	NSLog(@"Did receive HTTP auth challenge: %@", challenge);
+	_error = [[NSError alloc] initWithDomain:@"APPivotalTracker" 
+										code:APPT_ERROR_CONNECTION_AUTH_CHALLENGE 
+									userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:challenge, nil] 
+																		 forKeys:[NSArray arrayWithObjects:@"challenge", nil]]];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-	NSLog(@"Did receive response: \n %@", response);
+	_error = [error retain];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -115,14 +126,60 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	NSLog(@"\n\n%@", [NSString stringWithUTF8String:[_tokenXML bytes]]);
+	// Create an XML parser with the data retrieved from Pivotal
+	_xmlParser = [[NSXMLParser alloc] initWithData:_tokenXML];
+	[_xmlParser	setDelegate: self];
+	
+	[_xmlParser parse];
+	
+	NSLog(@"Final state, GUID: %@", self.token);
+	
 	[_connection release];
 	_connection = nil;
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+#pragma mark -- NSXMLParserDelegate Methods
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
+{	
+	if ([elementName isEqualToString:@"guid"])
+	{
+		if (_xmlStringBuffer == nil)
+		{
+			_xmlStringBuffer = [[NSMutableString alloc] initWithCapacity:50];
+		}
+	}
+	else if ([elementName isEqualToString:@"id"])
+	{
+		if (_xmlStringBuffer == nil)
+		{
+			_xmlStringBuffer = [[NSMutableString alloc] initWithCapacity:10];
+		}
+	}
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
-	NSLog(@"Did fail with error: \n %@", error);	
+	if ([elementName isEqualToString:@"guid"])
+	{
+		_token = [[NSString alloc] initWithString: _xmlStringBuffer];
+		// Release the XML buffer
+		[_xmlStringBuffer release];
+		_xmlStringBuffer = nil;
+	}
+	else if ([elementName isEqualToString:@"id"])
+	{
+		_tokenType = [_xmlStringBuffer integerValue];
+		// Release the XML buffer
+		[_xmlStringBuffer release];
+		_xmlStringBuffer = nil;
+	}
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+	// Append the found characters to the string buffer
+	[_xmlStringBuffer appendString:string];
 }
 
 @end
