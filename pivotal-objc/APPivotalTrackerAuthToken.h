@@ -25,6 +25,8 @@
 #import <Foundation/Foundation.h>
 #import "NSString+URLEncoded.h"
 
+@protocol APPivotalTrackerAuthTokenDelegate;
+
 @interface APPivotalTrackerAuthToken : NSObject <NSXMLParserDelegate> {
 	NSMutableData *_tokenXML;
 	NSURLConnection *_connection;
@@ -35,6 +37,7 @@
 	NSInteger _tokenType;
 	NSMutableString *_xmlStringBuffer;
 	NSError *_error;
+	id _delegate;
 }
 
 #pragma mark -- Properties
@@ -46,79 +49,42 @@
 @property (nonatomic, readonly) NSError *error;
 
 #pragma mark -- Methods
+
+- (id <APPivotalTrackerAuthTokenDelegate>)delegate;
+- (void)setDelegate:(id <APPivotalTrackerAuthTokenDelegate>)delegate;
+
+/*!
+ @method initWithUsername:password:
+ @abstract Initialize the token object with a users credentials
+ @discussion Initializes the Pivotal Tracker Auth Token with the user
+ credentials required to authenticate against the service.
+ @param username the Pivotal Tracker username or email address
+ @param password the Pivotal Tracker password for supplied username
+ */
 - (id)initWithUsername:(NSString *) username password:(NSString *) password;
+/*!
+ @method getPivotalUURLUsingEncodedAuth:
+ @abstract Returns the Pivotal Tracker Auth URL
+ @discussion Returns the Pivotal Tracker Auth URL including the user
+ credentials supplied in initWithUsername:password:
+ */
 - (NSURL *)getPivotalURLUsingEncodedAuth;
+
+/*!
+ @method getPivotalToken:
+ @abstract Retrieves an authenticated Pivotal Tracker token
+ @discussion Loads a Pivotal Tracker authenticated token based on the user
+ credenitals supplied.
+ @param url the URL to load the token from
+ */
 - (void)getPivotalToken:(NSURL *)url;
 
 #pragma mark -- NSURLConnectionDelegateMethods
 
-/*!
- @method connection:didReceiveAuthenticationChallenge:
- @abstract Start authentication for a given challenge
- @discussion Call useCredential:forAuthenticationChallenge:,
- continueWithoutCredentialForAuthenticationChallenge: or cancelAuthenticationChallenge: on
- the challenge sender when done.
- @param connection the connection for which authentication is needed
- @param challenge The NSURLAuthenticationChallenge to start authentication for
- */
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-
-/*! 
- @method connection:didFailWithError:   
- @abstract This method is called when an NSURLConnection has
- failed to load successfully.
- @discussion See the category description for information regarding
- the contract associated with the delivery of this delegate
- callback.
- @param connection an NSURLConnection that has failed to load.
- @param error The error that encapsulates information about what
- caused the load to fail.
- */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
-
-/*! 
- @method connection:didReceiveData:   
- @abstract This method is called to deliver the content of a URL
- load.
- @discussion Load data is delivered incrementally. Clients can
- concatenate each successive NSData object delivered through this
- method over the course of an asynchronous load to build up the
- complete data for a URL load. It is also important to note that this
- method provides the only way for an ansynchronous delegate to find
- out about load data. In other words, it is the responsibility of the
- delegate to retain or copy this data as it is delivered through this
- method.
- <p>See the category description for information regarding
- the contract associated with the delivery of this delegate 
- callback.
- @param connection  NSURLConnection that has received data.
- @param data A chunk of URL load data.
- */
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
-
-/*! 
- @method connectionDidFinishLoading:   
- @abstract This method is called when an NSURLConnection has
- finished loading successfully.
- @discussion See the category description for information regarding
- the contract associated with the delivery of this delegate
- callback.
- @param connection an NSURLConnection that has finished loading
- successfully.
- */
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
-
-/*! 
- @method connection:didFailWithError:   
- @abstract This method is called when an NSURLConnection has
- failed to load successfully.
- @discussion See the category description for information regarding
- the contract associated with the delivery of this delegate
- callback.
- @param connection an NSURLConnection that has failed to load.
- @param error The error that encapsulates information about what
- caused the load to fail.
- */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 
 #pragma mark -- NSXMLParserDelegate Methods
@@ -126,5 +92,34 @@
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict;
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName;
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string;
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError;
+- (void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError;
 
 @end
+
+@protocol APPivotalTrackerAuthTokenDelegate <NSObject>
+
+/*!
+ @method token:didReceiveToken:withType:
+ @abstract called when APPivotalTrackerAuthToken has successfully received an
+ authentated token
+ @discussion Notifies the delegate that Pivotal Tracker has authenticated the
+ user successfully.
+ @param token the APPivotalTrackerAuthToken context
+ @param guid the token ID
+ @param type the token type code
+ */
+- (void)token:(APPivotalTrackerAuthToken *)token didReceiveToken:(NSString *)guid withType:(NSInteger)type;
+
+/*!
+ @method token:failedWithError:
+ @abstract called when APPivotalTrackerAuthToken has encoutered an error
+ @discussion Notifes the delegate that there has been an issue authenticating
+ the user credentials.
+ @param token the APPivotalTrackerAuthToken context
+ @param error the error encoutered
+ */
+- (void)token:(APPivotalTrackerAuthToken *)token failedWithError:(NSError *)error;
+
+@end
+

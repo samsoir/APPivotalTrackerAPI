@@ -38,43 +38,40 @@
 		self.username = username;
 		self.password = password;
 		_error = nil;
+		_delegate = nil;
 	}
 	
 	return self;
 }
 
+- (id <APPivotalTrackerAuthTokenDelegate>)delegate;
+{
+	return (id <APPivotalTrackerAuthTokenDelegate>)_delegate;
+}
+
+- (void)setDelegate:(id <APPivotalTrackerAuthTokenDelegate>)delegate
+{
+	_delegate = [delegate retain];
+}
+
 - (NSURL *)getPivotalURLUsingEncodedAuth
 {
-	
-	NSString *urlString = [[NSString alloc] 
-						   initWithFormat:
-						   @"https://%@:%@@www.pivotaltracker.com/services/v3/tokens/active",
-						   [self.username getURLEncodedString], 
-						   [self.password getURLEncodedString]];
+	NSString *urlString = [NSString stringWithFormat:@"https://%@:%@@www.pivotaltracker.com/services/v3/tokens/active",[self.username getURLEncodedString], [self.password getURLEncodedString]];
 	
 	NSURL *url = [[NSURL alloc] initWithString:urlString];
-	
-	[urlString release];
 	
 	return [url autorelease];
 }
 
-/*
- Gets the pivotal auth token
- */
 - (void)getPivotalToken:(NSURL *)url
 {
 	[_connection initWithRequest:[NSURLRequest requestWithURL:url] 
 						delegate:self];
 	
 	[_connection start];
-	NSLog(@"Non blocking?");
 	
 }
 
-/*
- Initializes the library
- */
 - (id)init
 {
     self = [super init];
@@ -100,6 +97,7 @@
 	[_connection release];
 	[_xmlParser release];
 	[_error release];
+	[_delegate release];
 	
 	[super dealloc];
 }
@@ -126,13 +124,25 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+	// If there has been an error, do not parse XML
+	if (_error != nil) {
+		[_delegate token:self failedWithError:_error];
+		return;
+	}
+	
 	// Create an XML parser with the data retrieved from Pivotal
 	_xmlParser = [[NSXMLParser alloc] initWithData:_tokenXML];
 	[_xmlParser	setDelegate: self];
-	
 	[_xmlParser parse];
 	
-	NSLog(@"Final state, GUID: %@", self.token);
+	if (_error != nil)
+	{
+		[_delegate token:self failedWithError:_error];
+	}
+	else
+	{
+		[_delegate token:self didReceiveToken:self.token withType:self.tokenType];
+	}
 	
 	[_connection release];
 	_connection = nil;
@@ -180,6 +190,16 @@
 {
 	// Append the found characters to the string buffer
 	[_xmlStringBuffer appendString:string];
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+	_error = [parseError retain];
+}
+
+- (void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError
+{
+	_error = [validationError retain];
 }
 
 @end
